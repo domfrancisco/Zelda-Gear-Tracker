@@ -1,0 +1,339 @@
+body {
+    font-family: "spirits-soft", serif;
+    font-style: normal;
+    text-align: center;
+    margin: 0;
+    margin-top: 74px;
+    border: 0;
+    padding: 0;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    caret-color: transparent;
+}
+
+h1 {
+    display: inline;
+    font-family: "spirits-soft", serif;
+    font-weight: 100;
+    font-style: normal;
+    margin: 0;
+    margin-left: .35em;
+    width: calc(100% - 3.75em);
+}
+
+header {
+    display: flex;
+    text-align: left;
+    align-items: center;
+    background-color: #faf7dc;
+    color: #b99f65;
+    font-size: 1em;
+    padding: 1em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+menu {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.icon {
+    justify-content: center;
+    align-items: center;
+    margin-right: 1em;
+    height: 1.6em;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0%;
+}
+
+tabbar {
+    display: flex;
+    height: 3em;
+    align-items: center;
+    justify-content: center;
+}
+
+tab {
+    flex: 1;
+    height: 100%;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(49, 49, 49, 0.65);
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+tab p {
+    cursor: pointer;
+    margin: auto;
+}
+
+tab p:hover {
+    color: #faf7dc;
+}
+
+tab span {
+    font-family: "lora", serif;
+    font-weight: 100;
+    font-size: 1em;
+    font-variant: small-caps;
+    font-weight: lighter;
+    text-align: left;
+    align-items: center;
+    display: inline-block;
+}
+
+main {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 15px;
+    text-align: center;
+    color: white;
+}
+
+main div {
+    padding: 15px;
+    background-color: rgba(49, 49, 49, 0.65);
+    border-radius: 0 0 10px 10px;
+}
+
+main div div {
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+panel, #shoppingList, #enhancementItems {
+    text-align: left;
+    display: block;
+    padding: 0;
+    padding-top: .25em;
+    margin-bottom: 2em;
+    width: 960px;
+}
+
+#shoppingList, #enhancementItemsContainer > div > div {
+    background-color: #b99f65;
+    border-radius: 4px;
+    margin: .75em;
+    display: inline-block;
+    vertical-align:top;
+    padding: .5em;
+}
+
+#shoppingList p1, #enhancementItems p1 {
+    font-size: 1.75em;
+    padding: 0 .5em;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-image: url('../images/runes-bottom-ivory.svg');
+    height: 3em;
+    background-size: contain;
+    background-repeat: repeat-x;
+    border: none;
+    margin: 0;
+    padding: 0;
+    z-index: -1;
+}
+
+hr {
+    background-image: url('../images/bumps-top-ocher.svg');
+    background-repeat: repeat-x;
+    height: 14px;
+    border: none;
+    margin: 0;
+}
+
+hr2 {
+    background-image: url('../images/rune-hr.png');
+    background-repeat: repeat-x;
+    height: 7px;
+    border: none;
+    margin: .75em 0;
+    display: block;
+    background-size: contain;
+}
+
+error {
+    font-family: "lora", serif;
+    color: darkred;
+    display: block;
+    text-align: center;
+    margin: 2em;
+}
+
+.armor-panel, #enhancementItemsContainer div div {
+    background-color: #b99f65;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: .5em;
+    margin: .75em;
+    width: 440px;
+    display: inline-block;
+    vertical-align:top;
+}
+
+.armor-panel p, #enhancementItemsContainer div div ul {
+    text-align: center;
+}
+
+#OtherGarmentContainer {
+    display: block;
+    width: 920px;
+}
+
+h2 {
+    font-weight: 100;
+    font-variant: small-caps;
+    margin: 0;
+    text-align: left;
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+}
+
+.armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img, h2 img {
+    width: 5em;
+    height:5em;
+    max-width: 100%;
+    max-height: 100%;
+    background-image: url(../images/button-bg.png);
+    background-size: contain;
+    border-radius: 14px;
+    display: flex;
+    flex: 1;
+    margin: auto;
+}
+
+h2 img {
+    width: 2em;
+    height: 2em;
+    border-radius: 4px;
+    vertical-align: middle;
+    padding: .1em;
+    display: inline;
+}
+
+h2 span {
+    vertical-align: middle;
+    padding: .6em;
+}
+
+.armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+    text-align: center;
+    display: inline-block;
+    margin: 0 1.25em;
+}
+
+.set-icons div .star, .set-icons div .star-outline, .icon-wrapper div .star, .icon-wrapper div .star-outline {
+    display: none;
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));
+}
+
+.set-icons div .star-outline.show {
+    display: inline;
+}
+
+.icon-wrapper p, li p {
+    max-width: 6.25em;
+    position: relative;
+}
+
+.set-icons {
+    display: flex;
+    flex-direction: column;
+}
+
+.star-container .star, .star-container .star-outline {
+    width: 1em;
+    height: 1em;
+    position: relative;
+}
+
+@media (hover: hover) {
+    .icon-wrapper-preview:hover .star-outline {
+        display: inline;
+    }
+}
+
+.star-container {
+    position: relative;
+    top: -1.5em;
+    width: 5em;
+    height: 1em;
+    z-index: 099;
+    margin: auto;
+}
+
+.p-level-0 {
+    background-color: rgb(195, 194, 194);
+}
+
+.p-level-0:hover, li img, h2 img {
+    background-color: rgb(224, 224, 224);
+}
+
+.p-level-1 {
+    background-color: #faf7dc;
+}
+
+.armor-panel p p, li{
+    margin: 0;
+    display: inline-flex;
+    font-family: "lora", serif;
+}
+
+.armor-panel p {
+    margin: 0;
+    display:flex;
+    position: relative;
+    top: -.5em;
+}
+
+.active-tab {
+    background-color: rgba(86, 86, 86, 0.65);
+    color: #faf7dc;
+}
+
+/* Icons */
+.menu {
+    width: 1.6em;
+    height: 1.6em;
+    background-image: url('../images/bars-solid.svg');
+    background-size: cover;
+}
+
+.hyrule-crest {
+    display: inline;
+    width: 3em;
+    height: 1.8em;
+    background-image: url('../images/hyrule-crest.svg');
+    background-size: cover;
+}
+
+/* Landscape background image */
+@media (orientation: landscape) {
+    body {
+        background-image: url("../images/totk-bg-land.jpg");
+    }
+}
+  
+/* Portrait background image */
+@media (orientation: portrait) {
+    body {
+        background-image: url("../images/totk-bg-port.jpg");
+    }
+}
