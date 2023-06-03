@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Adam F">
+
+        <title>TOTK Couturier</title>
+
+        <!-- Social Meta Info Tags -->
+        <meta name="description" content="The Legend of Zelda - Tears of the Kingdom equipment upgrade assistant">
+        <meta name="keywords" content="">
+        <meta name="author" content="Adam F">
+        <meta property="og:image" content="./picture.png">
+        <meta property="og:title" content="TOTK Couturier">
+        <meta property="og:description" content="Equipment upgrade assistant">
+        <meta property="og:url" content="index.html">
+        <link rel="canonical" href="index.html" />
+
+        <!-- Mobile Shortcut Icons -->
+        <link rel="icon" href="icon.png">
+        <link rel="icon" type="image/png" href="./images/icons/favicon.png">
+        <link rel="apple-touch-icon" href="./images/icons/touch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="./images/icons/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="167x167" href="./images/icons/touch-icon-ipad-retina.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="./images/icons/touch-icon-iphone-retina.png">
+        <link rel="icon" sizes="192x192" href="./images/icons/android-icon.png">
+        <meta name="msapplication-square310x310logo" content="./images/icons/microsoft-icon.png">
+
+        <!-- External CSS -->
+        <link href="./css/style.css" rel="stylesheet">
+
+        <!-- External Scripts -->
+        <script src="./js/clothes.js"></script>
+        <script src="./js/script.js"></script>
+
+        <!-- Embedded Styles -->
+        <style>
+        </style>
+
+        <!-- Adobe Font Imports -->
+        <link rel="stylesheet" href="https://use.typekit.net/yqx1hig.css">
+
+    </head>
+
+    <!-- Visible Content -->
+    <body onload="onPageLoad()">
+        <header>
+            <icon class="hyrule-crest"></icon>
+            <h1>TOTK Couturier</h1>
+            <menu class="menu"></menu>
+        </header>
+        <main>
+            <tabbar>
+                <tab class="tab" id="enhancementItemsTab" onclick="switchTab('enhancementItemsTab')"><p><img class="icon" src="./images/candle-holder.svg" /><span>Enhancement<br/>Items</span></p></tab>
+                <tab class="tab" id="shoppingListTab" onclick="switchTab('shoppingListTab')"><p><img class="icon" src="./images/rupee.svg" /><span>Shopping<br/>List</span></p></tab>
+                <tab class="tab active-tab" id="cotureCollectionTab" onclick="switchTab('cotureCollectionTab')"><p><img class="icon" src="./images/boss-key.svg" /><span>Coture<br/>Collection</span></p></tab>
+            </tabbar>
+            <div>
+                <hr></hr>
+                <panel id="enhancementItems" style="display: none;">
+                    <p1>Clothing enhancement requirements - Tap the garment to toggle enhancement level.</p1>
+                    <error id="enhancementItemsError">Add some clothing to your collection to track enhancement items.</error>
+                    <container id="enhancementItemsContainer"></container>
+                </panel>
+                <panel id="shoppingList" style="display: none;">
+                    <p1>Items needed for all enhancements</p1>
+                    <hr2></hr2>
+                    <error id="shoppingListError">No enhancement items to track. Add clothing to your collection.</error>
+                    <container id="shoppingListContainer"></container>
+                </panel>
+                <panel id="cotureCollection" style="display: block;">
+                    <container id="cotureCollectionContainer"></container>
+                </panel>
+            </div>
+        </main>
+        <footer></footer>
+    </body>
+</html>
