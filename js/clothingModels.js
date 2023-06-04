@@ -11,15 +11,21 @@ class clothingSet{
 
 // each clothingItem has an upgrade list of items, the aquired bool, 
 // and an upgradeLevel. Each method is a distinct action you can take 
-class clothingItem {
-    constructor(upgradeList,aquired){
-        this.upgradeList = upgradeList;
-        this.aquired = false;
-        this.upgradeLevel = 0;
+class ClothingItem {
+    Name = "";
+    UpgradeLevel = 0;
+    Aquired = false;
+    UpgradeItemsList = [];
+    ClothingType = clothingType.unassigned;
+
+    constructor(upgradeItemsList, name, clothingType){
+        this.UpgradeItemsList = upgradeItemsList;
+        this.Name = name;
+        this.ClothingType = clothingType;
     }
 
     UpgradeItem(){
-        this.upgradeLevel += 1;
+        this.UpgradeLevel += 1;
     }
 
     AquireItem(){
@@ -27,18 +33,20 @@ class clothingItem {
     }
 
     GetItemsForNextLevelUp(){
-        return this.upgradeList[upgradeLevel];
+        return this.UpgradeItemsList[upgradeLevel];
     }
 }
 
 
 // change the upgrade array to an array of item objects
 class Item{
+    quantityRequired = 1;
+    quantityObtained = 0;
+    Aquired = false;
+
     constructor(quantityRequired,itemName){
-        this.quantityRequired = quantity; // number of items required
-        this.quantityObtained = 0; // number of items obtained
+        this.quantityRequired = quantityRequired; // number of items required
         this.itemName = itemName;
-        this.aquired = false;
     }
 }
 
@@ -58,4 +66,22 @@ class ShoppingList{
         */
     }
 
+}
+
+const clothingType = Object.freeze({
+  unassigned: 0,
+  head: 1,
+  chest: 2,
+  legs: 3,
+  accessory: 4,
+});
+
+function Tests(){
+    const upgradeItem1 = new Item(5,"upgradeItem1");
+    const upgradeItem2 = new Item(5,"upgradeItem2");
+    const upgradeItem3 = new Item(5,"upgradeItem3");
+    const upgradeList = [upgradeItem1,upgradeItem2,upgradeItem3];
+    const testHelm = new ClothingItem(upgradeList,"TestHelmet", clothingType.head);
+    console.log('Clothing item props =>');
+    console.log('Name:' + testHelm.Name + ' aquired:' + testHelm.Aquired);
 }
