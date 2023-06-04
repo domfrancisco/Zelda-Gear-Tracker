@@ -246,7 +246,18 @@ function cycleELevel(pVar, setItems, garment) {
         inputNumber = inputNumber - 1;
         if (inputNumber > -1 && inputNumber < 4) {
             console.log(inputString)  // This works untill the input number resets to 0 after that it always returns an empty array
-            const item = clothing.find(item => item.set === inputString ||item.head === inputString ||item.legs === inputString ||item.body === inputString || item.garment === inputString);
+            
+            const item = 
+                clothing.find(
+                    item => 
+                        item.set === inputString  ||
+                        item.head === inputString ||
+                        item.legs === inputString ||
+                        item.body === inputString || 
+                        item.garment === inputString
+                );
+            
+
             console.log(item.upgrade + " / " + inputNumber + " / " + item.upgrade.length);
             if (item && item.upgrade && inputNumber < item.upgrade.length) {
                 return item.upgrade[inputNumber];
