@@ -35,18 +35,32 @@ class ClothingItem {
     GetItemsForNextLevelUp(){
         return this.UpgradeItemsList[upgradeLevel];
     }
+
+    PrintUpgradeList(){
+        for (var i = this.UpgradeItemsList.length - 1; i >= 0; i--) {
+            var currentItem = this.UpgradeItemsList[i];
+            console.log('itemName:' + currentItem.ItemName + ' #Obtained:' + currentItem.quantityObtained + " #Required" + currentItem.quantityRequired )
+        }
+    }
+
+    PrintItem(){
+        console.log('Name:' + this.Name + 
+            ' aquired:' + this.Aquired + 
+            ' ClothingType:' + this.ClothingType);
+    }
 }
 
 
 // change the upgrade array to an array of item objects
 class Item{
+    ItemName = "";
     quantityRequired = 1;
     quantityObtained = 0;
     Aquired = false;
 
     constructor(quantityRequired,itemName){
         this.quantityRequired = quantityRequired; // number of items required
-        this.itemName = itemName;
+        this.ItemName = itemName;
     }
 }
 
@@ -82,6 +96,7 @@ function Tests(){
     const upgradeItem3 = new Item(5,"upgradeItem3");
     const upgradeList = [upgradeItem1,upgradeItem2,upgradeItem3];
     const testHelm = new ClothingItem(upgradeList,"TestHelmet", clothingType.head);
-    console.log('Clothing item props =>');
-    console.log('Name:' + testHelm.Name + ' aquired:' + testHelm.Aquired);
+   
+    testHelm.PrintItem();
+    testHelm.PrintUpgradeList();
 }
