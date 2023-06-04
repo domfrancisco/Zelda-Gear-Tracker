@@ -1,3 +1,28 @@
+class clothingOption = {
+    constructor(set,head,legs,body,upgrade){
+        this.set = set;
+        this.head = head;
+        this.leg = legs;
+        this.body = body;
+        this.upgrade = upgrade;
+        this.aquired = false;
+        this.upgradeLevel = 0;
+    }
+
+    UpgradeItem(){
+        this.upgradeLevel += 1;
+    }
+
+    AquireItem(){
+        this.aquired = true;
+    }
+
+    GetItemsForNextLevelUp(){
+        return this.upgrade[upgradeLevel];
+    }
+}
+
+
 const clothing = [
     {
         set: "Hylian Suit",
