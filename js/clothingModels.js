@@ -1,12 +1,14 @@
 // each clothing set will have their own set of clothing items
 // head,leg,and body will be clothingItem objects
 class clothingSet{
-     constructor(set, head,legs,body){
-        this.setName = set;
-        this.head = head;
-        this.leg = legs;
-        this.body = body;
-    }
+    constructor(set, head, legs, body, garment, upgrade){
+       this.setName = set;
+       this.head = head;
+       this.leg = legs;
+       this.body = body;
+       this.garment = garment;
+       this.upgrade = upgrade;
+   }
 }
 
 // each clothingItem has an upgrade list of items, the aquired bool, 
@@ -14,23 +16,24 @@ class clothingSet{
 class ClothingItem {
     Name = "";
     UpgradeLevel = 0;
-    Aquired = false;
+    // Aquired = false;
     UpgradeItemsList = [];
-    ClothingType = clothingType.unassigned;
+    //ClothingType = clothingType.unassigned;
 
-    constructor(upgradeItemsList, name, clothingType){
-        this.UpgradeItemsList = upgradeItemsList;
+    constructor(upgradeItemsList, name){
+    //constructor(upgradeItemsList, name, clothingType){
+            this.UpgradeItemsList = upgradeItemsList;
         this.Name = name;
-        this.ClothingType = clothingType;
+        //this.ClothingType = clothingType;
     }
 
     UpgradeItem(){
         this.UpgradeLevel += 1;
     }
 
-    AquireItem(){
-        this.aquired = true;
-    }
+    // AquireItem(){
+    //     this.aquired = true;
+    // }
 
     GetItemsForNextLevelUp(){
         return this.UpgradeItemsList[upgradeLevel];
@@ -44,9 +47,10 @@ class ClothingItem {
     }
 
     PrintItem(){
-        console.log('Name:' + this.Name + 
-            ' aquired:' + this.Aquired + 
-            ' ClothingType:' + this.ClothingType);
+        console.log('Name:' + this.Name); 
+        // console.log('Name:' + this.Name + 
+        //     // ' aquired:' + this.Aquired + 
+        //     ' ClothingType:' + this.ClothingType);
     }
 }
 
@@ -56,7 +60,7 @@ class Item{
     ItemName = "";
     quantityRequired = 1;
     quantityObtained = 0;
-    Aquired = false;
+    // Aquired = false;
 
     constructor(quantityRequired,itemName){
         this.quantityRequired = quantityRequired; // number of items required
@@ -82,21 +86,46 @@ class ShoppingList{
 
 }
 
-const clothingType = Object.freeze({
-  unassigned: 0,
-  head: 1,
-  chest: 2,
-  legs: 3,
-  accessory: 4,
-});
+// const clothingType = Object.freeze({
+//   unassigned: 0,
+//   head: 1,
+//   chest: 2,
+//   legs: 3,
+//   garment: 4,
+// });
 
 function Tests(){
     const upgradeItem1 = new Item(5,"upgradeItem1");
     const upgradeItem2 = new Item(5,"upgradeItem2");
     const upgradeItem3 = new Item(5,"upgradeItem3");
     const upgradeList = [upgradeItem1,upgradeItem2,upgradeItem3];
-    const testHelm = new ClothingItem(upgradeList,"TestHelmet", clothingType.head);
+    const testHelm = new ClothingItem(upgradeList,"TestHelmet");
+    //const testHelm = new ClothingItem(upgradeList,"TestHelmet", clothingType.head);
    
     testHelm.PrintItem();
     testHelm.PrintUpgradeList();
 }
+
+
+
+//Adam is trying to figure out how to turn his data into a class...
+
+const clothingSets = [];
+
+// Iterate over the clothing array
+for (const item of clothing) {
+  const { set, head, legs, body, garment, upgrade } = item;
+  
+  // Create instances of ClothingItem for head, legs, and body
+  const headItem = new ClothingItem(head, "Head");
+  const legsItem = new ClothingItem(legs, "Legs");
+  const bodyItem = new ClothingItem(body, "Body");
+  const garmentItem = new ClothingItem(garment, "Garment");
+
+  // Create an instance of clothingSet and add it to the clothingSets array
+  const clothingSetInstance = new clothingSet(set, headItem, legsItem, bodyItem, garmentItem, upgrade);
+  clothingSets.push(clothingSetInstance);
+}
+
+console.log(clothingSets);
+

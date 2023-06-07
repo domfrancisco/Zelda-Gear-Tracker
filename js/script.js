@@ -3,7 +3,7 @@ var shoppingList = [];
 //declare Acquired Garment list that gets updated throughout the code
 var garmentUpgrades = [];
 //variable used to sort garment order
-var orderReferenceList = [];
+const orderReferenceList = [];
         //List is created from clothing constant
         for (const item of clothing) {
             const { set, head, legs, body, garment } = item;

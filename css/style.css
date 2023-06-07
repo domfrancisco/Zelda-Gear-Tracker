@@ -22,6 +22,10 @@ h1 {
     width: calc(100% - 3.75em);
 }
 
+h1 p {
+    display: inline;
+}
+
 header {
     display: flex;
     text-align: left;
@@ -177,13 +181,17 @@ error {
 
 .armor-panel, #enhancementItemsContainer div div {
     background-color: #b99f65;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     padding: .5em;
     margin: .75em;
-    width: 440px;
+    width: 436px;
     display: inline-block;
     vertical-align:top;
+    border-top: 1px solid #dadcaa;
+    border-right: 2px solid #63523e;
+    border-bottom: 2px solid #63523e;
+    border-left: 1px solid #dadcaa;
 }
 
 .armor-panel p, #enhancementItemsContainer div div ul {
@@ -236,6 +244,12 @@ h2 span {
     text-align: center;
     display: inline-block;
     margin: 0 1.25em;
+}
+
+#shoppingListContainer ul {
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .set-icons div .star, .set-icons div .star-outline, .icon-wrapper div .star, .icon-wrapper div .star-outline {
