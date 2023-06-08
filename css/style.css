@@ -46,6 +46,23 @@ menu {
     padding: 0;
 }
 
+menu ul {
+    position: absolute;
+    right: 2em;
+    top: 74px;
+    background-color: #63523e;
+    font-family: "lora", serif;
+    color: #faf7dc;
+    border: 0;
+    margin: 0;
+    padding: 1em 4em;
+    cursor: pointer;
+}
+
+menu ul:hover {
+    color: white;
+}
+
 .icon {
     justify-content: center;
     align-items: center;

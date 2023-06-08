@@ -4,7 +4,7 @@ class clothingSet{
     constructor(set, head, legs, body, garment, upgrade){
        this.setName = set;
        this.head = head;
-       this.leg = legs;
+       this.legs = legs;
        this.body = body;
        this.garment = garment;
        this.upgrade = upgrade;
@@ -114,12 +114,33 @@ const clothingSets = [];
 
 // Iterate over the clothing array
 for (const item of clothing) {
-  const { set, head, legs, body, garment, upgrade } = item;
+    const { set, head, legs, body, garment, upgrade } = item;
   
-  // Create an instance of clothingSet and add it to the clothingSets array
-  const clothingSetInstance = new clothingSet(set, head, legs, body, garment, upgrade);
-  clothingSets.push(clothingSetInstance);
-}
+    // Create an instance of clothingSet and add it to the clothingSets array
+    const clothingSetInstance = new clothingSet(set, head, legs, body, garment, upgrade);
+    clothingSets.push(clothingSetInstance);
+  }
 
-//console.log(clothingSets);
+console.log(clothingSets);
 
+//trying to regenerate with ChatGPT assistance
+
+// function regenerateClothingSets(clothing) {
+//     const regeneratedClothingSets = [];
+  
+//     for (const item of clothing) {
+//       const { set, head, legs, body, garment, upgrade } = item;
+  
+//       const clothingSetInstance = new ClothingSet(set, head, legs, body, garment, upgrade);
+//       regeneratedClothingSets.push(clothingSetInstance);
+//     }
+  
+//     return regeneratedClothingSets;
+//   }
+  
+//   // Usage example
+//   const clothing = [
+//     // Array of clothing items
+//   ];
+  
+//   const clothingSets = regenerateClothingSets(clothing);

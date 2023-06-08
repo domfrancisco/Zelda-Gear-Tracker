@@ -49,7 +49,7 @@ var activeTab = 'cotureCollection';
             // Check if the item has the "set" property and it's not null
             if (item.hasOwnProperty('setName') && item.setName !== null) {
         // Add the set name to the uniqueSets Set
-                uniqueSets.add(item.setName.toString());
+                uniqueSets.add(item.setName);
             }
         });
         //make a header with link for each set that toggles the garment visibility
@@ -112,7 +112,7 @@ var activeTab = 'cotureCollection';
             if (clothingSets[i].setName === setName) {
                 return {
                     head: clothingSets[i].head,
-                    leg: clothingSets[i].leg,
+                    legs: clothingSets[i].legs,
                     body: clothingSets[i].body
                 };
             }
@@ -126,7 +126,7 @@ var activeTab = 'cotureCollection';
         resultContainer.appendChild(hr);
         resultContainer.classList.add("set-icons");
         createParagraph(setItems, setItems.head, 'head', resultContainer);
-        createParagraph(setItems, setItems.leg, 'legs', resultContainer);
+        createParagraph(setItems, setItems.legs, 'legs', resultContainer);
         createParagraph(setItems, setItems.body, 'body', resultContainer);
     }
 
@@ -184,6 +184,9 @@ function cycleELevel(pVar, setItems, garment) {
         if (icon) {
             icon.className = (eLevel == 0) ? "p-level-0": "p-level-1";
         }
+        console.log(clothingSets[0]);
+        console.log(setItems[garment] + ' , ' + eLevel);
+        storeNameAndNumber(setItems[garment], eLevel);
     }
 
 //Advance the Enhancement Level Div Attribute and reset to 0 after 5
@@ -246,11 +249,9 @@ function cycleELevel(pVar, setItems, garment) {
     }
 
 //Find the needed upgrade items based on garment name and level
-    function findUpgrades(inputString, inputNumber) { ///IMPORTANT  !!!  <----------- Pretty sure this is the function where thebug occurs
+    function findUpgrades(inputString, inputNumber) { 
         inputNumber = inputNumber - 1;
         if (inputNumber > -1 && inputNumber < 4) {
-            //console.log(inputString, inputNumber)  // This works untill the input number resets to 0 after that it always returns an empty array
-            
             const item = 
                 clothingSets.find(
                     item => 
@@ -260,12 +261,7 @@ function cycleELevel(pVar, setItems, garment) {
                         item.body === inputString || 
                         item.garment === inputString
                 );
-
-            console.log(item);
-            //console.log(item.upgrade + " / " + inputNumber + " / " + item.upgrade.length);
             if (item && item.upgrade && inputNumber < item.upgrade.length) {
-                //console.log(item.upgrade[inputNumber]);
-                //console.log('hello');
                 return item.upgrade[inputNumber];
             }
             return [];
@@ -451,7 +447,7 @@ function cycleELevel(pVar, setItems, garment) {
 //create the file name for armor icons
     function makeArmorIconName(inputText) {
         // Replace spaces with dashes
-        inputText = inputText.toString();
+        //inputText = inputText;
         let formattedText = inputText.replace(/ /g, '-');
         // Convert all letters to lowercase
         formattedText = formattedText.toLowerCase();
@@ -459,3 +455,34 @@ function cycleELevel(pVar, setItems, garment) {
         formattedText = formattedText.charAt(0).toUpperCase() + formattedText.slice(1) + ".png";
         return formattedText;
       }
+
+
+//trying to create saved data
+
+const data = {
+    saveGarments: []
+};
+  
+function storeNameAndNumber(name, number) {
+    const existingIndex = data.saveGarments.findIndex(item => item.name === name);
+
+    if (existingIndex !== -1) {
+        // Replace existing number
+        data.saveGarments[existingIndex].number = number;
+    } else {
+        // Add new name and number
+        data.saveGarments.push({ name, number });
+    }
+    console.log(data);
+}
+
+//menu toggle
+
+function toggleMenu() {
+    const menuDiv = document.getElementById("menuPanel");
+    if (menuDiv.style.display === "none") {
+        menuDiv.style.display = "block";
+    } else {
+        menuDiv.style.display = "none";
+    }
+}
