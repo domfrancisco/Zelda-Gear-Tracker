@@ -116,14 +116,8 @@ const clothingSets = [];
 for (const item of clothing) {
   const { set, head, legs, body, garment, upgrade } = item;
   
-  // Create instances of ClothingItem for head, legs, and body
-  const headItem = new ClothingItem(head, "Head");
-  const legsItem = new ClothingItem(legs, "Legs");
-  const bodyItem = new ClothingItem(body, "Body");
-  const garmentItem = new ClothingItem(garment, "Garment");
-
   // Create an instance of clothingSet and add it to the clothingSets array
-  const clothingSetInstance = new clothingSet(set, headItem, legsItem, bodyItem, garmentItem, upgrade);
+  const clothingSetInstance = new clothingSet(set, head, legs, body, garment, upgrade);
   clothingSets.push(clothingSetInstance);
 }
 

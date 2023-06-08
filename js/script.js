@@ -49,7 +49,7 @@ var activeTab = 'cotureCollection';
             // Check if the item has the "set" property and it's not null
             if (item.hasOwnProperty('setName') && item.setName !== null) {
         // Add the set name to the uniqueSets Set
-                uniqueSets.add(item.setName);
+                uniqueSets.add(item.setName.toString());
             }
         });
         //make a header with link for each set that toggles the garment visibility
@@ -83,17 +83,10 @@ var activeTab = 'cotureCollection';
         for (const entry of clothingSets) {
             if (entry.setName === null) {
                 const { set, head, legs, body, garment, upgrade } = entry;
-  
-                // Create instances of ClothingItem for head, legs, and body
-                const headItem = new ClothingItem(head, "Head");
-                const legsItem = new ClothingItem(legs, "Legs");
-                const bodyItem = new ClothingItem(body, "Body");
-                const garmentItem = new ClothingItem(garment, "Garment");
-              
-                // Create an instance of clothingSet and add it to the clothingSets array
-                const clothingSetInstance = new clothingSet(set, headItem, legsItem, bodyItem, garmentItem, upgrade);
+                  // Create an instance of clothingSet and add it to the clothingSets array
+                const clothingSetInstance = new clothingSet(set, head, legs, body, garment, upgrade);
                 nullSetGarments.push(clothingSetInstance);
-                          }
+            }
         }
         const div2 = document.createElement('div');
         div2.id = 'OtherGarmentContainer';
@@ -107,35 +100,23 @@ var activeTab = 'cotureCollection';
         var container2 = document.getElementById('OtherGarmentContainer')
         //Put the orphaned garments at the bottom of the list
         var i = 0;
-        console.log(nullSetGarments);//IMPORTANT -> Somehow in the middle of th elist it breaks
-        
-        var currentElement;
         nullSetGarments.forEach((item) => {
-            try{
-                currentElement = item;
-                createParagraph(nullSetGarments[i].garment.UpgradeItemsList.UpgradeItemsList, item.garment.UpgradeItemsList.UpgradeItemsList, i, container2);
-                i = i + 1;
-            }
-            catch(errorElement){
-                console.log("failing index:" + i);
-            }
-           
+            createParagraph(nullSetGarments[i].garment, item.garment, i, container2);
+            i = i + 1;
         });
     }
 
 //create a data object of each set's individual garments
     function makeSetItems(setName) {
-        for (let i = 0; i < clothing.length; i++) {
-            const item = clothing[i];
-            if (item.set === setName) {
+        for (let i = 0; i < clothingSets.length; i++) {
+            if (clothingSets[i].setName === setName) {
                 return {
-                    head: item.head,
-                    legs: item.legs,
-                    body: item.body
+                    head: clothingSets[i].head,
+                    leg: clothingSets[i].leg,
+                    body: clothingSets[i].body
                 };
             }
         }
-        //return null; // Return null if no match found
     }
 
 //Construct the group of garments that make up a Gear Set
@@ -145,7 +126,7 @@ var activeTab = 'cotureCollection';
         resultContainer.appendChild(hr);
         resultContainer.classList.add("set-icons");
         createParagraph(setItems, setItems.head, 'head', resultContainer);
-        createParagraph(setItems, setItems.legs, 'legs', resultContainer);
+        createParagraph(setItems, setItems.leg, 'legs', resultContainer);
         createParagraph(setItems, setItems.body, 'body', resultContainer);
     }
 
@@ -268,10 +249,10 @@ function cycleELevel(pVar, setItems, garment) {
     function findUpgrades(inputString, inputNumber) { ///IMPORTANT  !!!  <----------- Pretty sure this is the function where thebug occurs
         inputNumber = inputNumber - 1;
         if (inputNumber > -1 && inputNumber < 4) {
-            //console.log(inputString)  // This works untill the input number resets to 0 after that it always returns an empty array
+            //console.log(inputString, inputNumber)  // This works untill the input number resets to 0 after that it always returns an empty array
             
             const item = 
-                clothing.find(
+                clothingSets.find(
                     item => 
                         item.set === inputString  ||
                         item.head === inputString ||
@@ -279,10 +260,12 @@ function cycleELevel(pVar, setItems, garment) {
                         item.body === inputString || 
                         item.garment === inputString
                 );
-            
 
+            console.log(item);
             //console.log(item.upgrade + " / " + inputNumber + " / " + item.upgrade.length);
             if (item && item.upgrade && inputNumber < item.upgrade.length) {
+                //console.log(item.upgrade[inputNumber]);
+                //console.log('hello');
                 return item.upgrade[inputNumber];
             }
             return [];
