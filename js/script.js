@@ -43,43 +43,57 @@ var activeTab = 'cotureCollection';
         // Create a Set to store unique set names
         const uniqueSets = new Set();
         // Iterate through the nested array
-        clothing.forEach(function(item) {
-        // Check if the item has the "set" property and it's not null
-        if (item.hasOwnProperty('set') && item.set !== null) {
+        clothingSets.forEach(function(item) {
+        //before switching to MODEL
+        //clothing.forEach(function(item) {
+            // Check if the item has the "set" property and it's not null
+            if (item.hasOwnProperty('setName') && item.setName !== null) {
         // Add the set name to the uniqueSets Set
-                uniqueSets.add(item.set);
+                uniqueSets.add(item.setName);
             }
         });
         //make a header with link for each set that toggles the garment visibility
         const container = document.getElementById('cotureCollectionContainer');
-        uniqueSets.forEach((setName) => {
+        uniqueSets.forEach((uniqueSetName) => {
             const div = document.createElement('div');
             const heading = document.createElement('h2');
-            heading.textContent = setName;
+            heading.textContent = uniqueSetName;
             const text = document.createElement('p');
-            text.id = removeSpaces(setName) + 'SetItems';
+            text.id = removeSpaces(uniqueSetName) + 'SetItems';
             text.style.display = 'none';
             div.classList.add('armor-panel');
             // Assign onclick property to the header
             heading.onclick = function() {
-                const textElement = document.getElementById(removeSpaces(setName) + 'SetPieces');
+                const textElement = document.getElementById(removeSpaces(uniqueSetName) + 'SetPieces');
                 textElement.style.display = (textElement.style.display === 'none') ? 'block' : 'none';
             };
             // Assign unique id to the text element so we can reference it for the garments
-            text.id = removeSpaces(setName) + 'SetPieces';
+            text.id = removeSpaces(uniqueSetName) + 'SetPieces';
             div.appendChild(heading);
             div.appendChild(text);
             container.appendChild(div);
             //add the garment icons into the new container
-            var setItems = makeSetItems(setName);
-            makeSetIcons(setName, setItems);
+            var setItems = makeSetItems(uniqueSetName);
+            makeSetIcons(uniqueSetName, setItems);
         });
         //Now we need the garments without sets or headers
         const nullSetGarments = [];
-        for (const entry of clothing) {
-            if (entry.set === null) {
-                nullSetGarments.push(entry.garment);
-            }
+        //before MODEL
+        //for (const entry of clothing) {
+        for (const entry of clothingSets) {
+            if (entry.setName === null) {
+                const { set, head, legs, body, garment, upgrade } = entry;
+  
+                // Create instances of ClothingItem for head, legs, and body
+                const headItem = new ClothingItem(head, "Head");
+                const legsItem = new ClothingItem(legs, "Legs");
+                const bodyItem = new ClothingItem(body, "Body");
+                const garmentItem = new ClothingItem(garment, "Garment");
+              
+                // Create an instance of clothingSet and add it to the clothingSets array
+                const clothingSetInstance = new clothingSet(set, headItem, legsItem, bodyItem, garmentItem, upgrade);
+                nullSetGarments.push(clothingSetInstance);
+                          }
         }
         const div2 = document.createElement('div');
         div2.id = 'OtherGarmentContainer';
@@ -93,8 +107,9 @@ var activeTab = 'cotureCollection';
         var container2 = document.getElementById('OtherGarmentContainer')
         //Put the orphaned garments at the bottom of the list
         var i = 0;
-        nullSetGarments.forEach((garment) => {
-            createParagraph(nullSetGarments, garment, i, container2);
+        console.log(nullSetGarments);//IMPORTANT -> Somehow in the middle of th elist it breaks
+        nullSetGarments.forEach((item) => {
+            createParagraph(nullSetGarments[i].garment.UpgradeItemsList.UpgradeItemsList, item.garment.UpgradeItemsList.UpgradeItemsList, i, container2);
             i = i + 1;
         });
     }
@@ -133,7 +148,7 @@ var activeTab = 'cotureCollection';
         image.id = removeSpaces(text) + "Icon";
         image.classList.add("p-level-0");
         const paragraph = document.createElement("p");
-        paragraph.id = removeSpaces(setItems[garment]) + "EnhancementTracker";
+        paragraph.id =  (setItems[garment] === null) ? "EnhancementTracker" : removeSpaces(setItems[garment]) + "EnhancementTracker";
         paragraph.setAttribute('enhancementlevel', '0');
         paragraph.textContent = text;
         const stars = document.createElement("div");
@@ -212,7 +227,6 @@ function cycleELevel(pVar, setItems, garment) {
         var itemsToAddToList = [];
         if (level < 5 && level > 0) {
             itemsToAddToList = findUpgrades(name, level)
-            console.log(itemsToAddToList);
             garmentProperties = {
                 garment: name,
                 requires: itemsToAddToList
@@ -245,7 +259,7 @@ function cycleELevel(pVar, setItems, garment) {
     function findUpgrades(inputString, inputNumber) { ///IMPORTANT  !!!  <----------- Pretty sure this is the function where thebug occurs
         inputNumber = inputNumber - 1;
         if (inputNumber > -1 && inputNumber < 4) {
-            console.log(inputString)  // This works untill the input number resets to 0 after that it always returns an empty array
+            //console.log(inputString)  // This works untill the input number resets to 0 after that it always returns an empty array
             
             const item = 
                 clothing.find(
@@ -258,7 +272,7 @@ function cycleELevel(pVar, setItems, garment) {
                 );
             
 
-            console.log(item.upgrade + " / " + inputNumber + " / " + item.upgrade.length);
+            //console.log(item.upgrade + " / " + inputNumber + " / " + item.upgrade.length);
             if (item && item.upgrade && inputNumber < item.upgrade.length) {
                 return item.upgrade[inputNumber];
             }
@@ -444,6 +458,7 @@ function cycleELevel(pVar, setItems, garment) {
 //create the file name for armor icons
     function makeArmorIconName(inputText) {
         // Replace spaces with dashes
+        inputText = inputText.toString();
         let formattedText = inputText.replace(/ /g, '-');
         // Convert all letters to lowercase
         formattedText = formattedText.toLowerCase();

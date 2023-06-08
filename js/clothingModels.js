@@ -127,5 +127,5 @@ for (const item of clothing) {
   clothingSets.push(clothingSetInstance);
 }
 
-console.log(clothingSets);
+//console.log(clothingSets);
 

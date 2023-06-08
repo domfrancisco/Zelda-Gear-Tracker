@@ -22,9 +22,9 @@ h1 {
     width: calc(100% - 3.75em);
 }
 
-h1 p {
+/* h1 p {
     display: inline;
-}
+} */
 
 header {
     display: flex;
@@ -224,6 +224,10 @@ h2 {
     display: flex;
     flex: 1;
     margin: auto;
+    border-top: .5px solid #f6f6f6;
+    border-right: 1px solid #8e8e8e;
+    border-bottom: 1px solid #8e8e8e;
+    border-left: .5px solid #f6f6f6;
 }
 
 h2 img {
@@ -298,6 +302,17 @@ h2 span {
 
 .p-level-0:hover, li img, h2 img {
     background-color: rgb(224, 224, 224);
+}
+
+.p-level-0:active, li img, h2 img {
+    background-color: #e8ddc6;
+}
+
+.armor-panel p > div > img:nth-of-type(1):active, .icon-wrapper > img:nth-of-type(1):active, li img:active, h2 img:active {
+    border-top: 2px solid #948d75;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-left: 2px solid #948d75;
 }
 
 .p-level-1 {
