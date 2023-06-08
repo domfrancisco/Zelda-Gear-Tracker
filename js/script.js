@@ -461,6 +461,7 @@ function cycleELevel(pVar, setItems, garment) {
 
 //Strip spaces from a string to turn it into a variable name
     function removeSpaces(str) {
+        if (str == '' || str==null || str==undefined) return '';
         return str.replace(/\s/g, '');
     }
 
