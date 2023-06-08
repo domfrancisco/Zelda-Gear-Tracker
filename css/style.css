@@ -22,9 +22,37 @@ h1 {
     width: calc(100% - 3.75em);
 }
 
-/* h1 p {
+h2 {
+    font-weight: 100;
+    font-variant: small-caps;
+    margin: 0;
+    text-align: left;
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+}
+
+h2 img {
+    width: 2em;
+    height: 2em;
+    border-radius: 4px;
+    vertical-align: middle;
+    padding: .1em;
     display: inline;
-} */
+}
+
+h2 span {
+    vertical-align: middle;
+    padding: .6em;
+}
+
+hr {
+    background-image: url('../images/bumps-top-ocher.svg');
+    background-repeat: repeat-x;
+    height: 14px;
+    border: none;
+    margin: 0;
+}
 
 header {
     display: flex;
@@ -38,6 +66,40 @@ header {
     top: 0;
     width: 100%;
     z-index: 999;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-image: url('../images/runes-bottom-ivory.svg');
+    height: 3em;
+    background-size: contain;
+    background-repeat: repeat-x;
+    border: none;
+    margin: 0;
+    padding: 0;
+    z-index: -1;
+}
+
+main {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 15px;
+    text-align: center;
+    color: white;
+}
+
+main div {
+    padding: 15px;
+    background-color: rgba(49, 49, 49, 0.65);
+    border-radius: 0 0 10px 10px;
+}
+
+main div div {
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 menu {
@@ -59,6 +121,10 @@ menu ul {
     display: flex;
 }
 
+menu ul hr {
+    display: flex;
+}
+
 menu ul span {
     padding: 1em 4em;
     display: flex;
@@ -69,21 +135,37 @@ menu ul span:hover {
     color: white;
 }
 
-menu ul hr {
-    display: flex;
-}
-
-.icon {
-    justify-content: center;
-    align-items: center;
-    margin-right: 1em;
-    height: 1.6em;
-}
-
 ul {
     list-style-type: none;
     display: flex;
     padding: 0%;
+}
+
+error {
+    font-family: "lora", serif;
+    color: darkred;
+    display: block;
+    text-align: center;
+    margin: 2em;
+}
+
+hr2 {
+    background-image: url('../images/rune-hr.png');
+    background-repeat: repeat-x;
+    height: 7px;
+    border: none;
+    margin: .75em 0;
+    display: block;
+    background-size: contain;
+}
+
+panel, #shoppingList, #enhancementItems {
+    text-align: left;
+    display: block;
+    padding: 0;
+    padding-top: .25em;
+    margin-bottom: 2em;
+    width: 960px;
 }
 
 tabbar {
@@ -123,87 +205,22 @@ tab span {
     display: inline-block;
 }
 
-main {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 15px;
-    text-align: center;
-    color: white;
+.active-tab {
+    background-color: rgba(86, 86, 86, 0.65);
+    color: #faf7dc;
 }
 
-main div {
-    padding: 15px;
-    background-color: rgba(49, 49, 49, 0.65);
-    border-radius: 0 0 10px 10px;
-}
-
-main div div {
-    padding: 0;
-    background-color: rgba(0, 0, 0, 0);
-}
-
-panel, #shoppingList, #enhancementItems {
-    text-align: left;
-    display: block;
-    padding: 0;
-    padding-top: .25em;
-    margin-bottom: 2em;
-    width: 960px;
-}
-
-#shoppingList, #enhancementItemsContainer > div > div {
-    background-color: #b99f65;
-    border-radius: 4px;
-    margin: .75em;
-    display: inline-block;
-    vertical-align:top;
-    padding: .5em;
-}
-
-#shoppingList p1, #enhancementItems p1 {
-    font-size: 1.75em;
-    padding: 0 .5em;
-}
-
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-image: url('../images/runes-bottom-ivory.svg');
-    height: 3em;
-    background-size: contain;
-    background-repeat: repeat-x;
-    border: none;
+.armor-panel p {
     margin: 0;
-    padding: 0;
-    z-index: -1;
+    display:flex;
+    position: relative;
+    top: -.5em;
 }
 
-hr {
-    background-image: url('../images/bumps-top-ocher.svg');
-    background-repeat: repeat-x;
-    height: 14px;
-    border: none;
+.armor-panel p p, li{
     margin: 0;
-}
-
-hr2 {
-    background-image: url('../images/rune-hr.png');
-    background-repeat: repeat-x;
-    height: 7px;
-    border: none;
-    margin: .75em 0;
-    display: block;
-    background-size: contain;
-}
-
-error {
+    display: inline-flex;
     font-family: "lora", serif;
-    color: darkred;
-    display: block;
-    text-align: center;
-    margin: 2em;
 }
 
 .armor-panel, #enhancementItemsContainer div div {
@@ -225,19 +242,10 @@ error {
     text-align: center;
 }
 
-#OtherGarmentContainer {
-    display: block;
-    width: 920px;
-}
-
-h2 {
-    font-weight: 100;
-    font-variant: small-caps;
-    margin: 0;
-    text-align: left;
-    vertical-align: top;
+.armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+    text-align: center;
     display: inline-block;
-    width: 100%;
+    margin: 0 1.25em;
 }
 
 .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img, h2 img {
@@ -257,70 +265,23 @@ h2 {
     border-left: .5px solid #f6f6f6;
 }
 
-h2 img {
-    width: 2em;
-    height: 2em;
-    border-radius: 4px;
-    vertical-align: middle;
-    padding: .1em;
-    display: inline;
+.armor-panel p > div > img:nth-of-type(1):active, .icon-wrapper > img:nth-of-type(1):active, li img:active, h2 img:active {
+    border-top: 2px solid #948d75;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-left: 2px solid #948d75;
 }
 
-h2 span {
-    vertical-align: middle;
-    padding: .6em;
-}
-
-.armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
-    text-align: center;
-    display: inline-block;
-    margin: 0 1.25em;
-}
-
-#shoppingListContainer ul {
+.icon {
     justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.set-icons div .star, .set-icons div .star-outline, .icon-wrapper div .star, .icon-wrapper div .star-outline {
-    display: none;
-    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));
-}
-
-.set-icons div .star-outline.show {
-    display: inline;
+    align-items: center;
+    margin-right: 1em;
+    height: 1.6em;
 }
 
 .icon-wrapper p, li p {
     max-width: 6.25em;
     position: relative;
-}
-
-.set-icons {
-    display: flex;
-    flex-direction: column;
-}
-
-.star-container .star, .star-container .star-outline {
-    width: 1em;
-    height: 1em;
-    position: relative;
-}
-
-@media (hover: hover) {
-    .icon-wrapper-preview:hover .star-outline {
-        display: inline;
-    }
-}
-
-.star-container {
-    position: relative;
-    top: -1.5em;
-    width: 5em;
-    height: 1em;
-    z-index: 099;
-    margin: auto;
 }
 
 .p-level-0 {
@@ -335,33 +296,70 @@ h2 span {
     background-color: #e8ddc6;
 }
 
-.armor-panel p > div > img:nth-of-type(1):active, .icon-wrapper > img:nth-of-type(1):active, li img:active, h2 img:active {
-    border-top: 2px solid #948d75;
-    border-right: 0px;
-    border-bottom: 0px;
-    border-left: 2px solid #948d75;
-}
-
 .p-level-1 {
     background-color: #faf7dc;
 }
 
-.armor-panel p p, li{
-    margin: 0;
-    display: inline-flex;
-    font-family: "lora", serif;
+.set-icons {
+    display: flex;
+    flex-direction: column;
 }
 
-.armor-panel p {
-    margin: 0;
-    display:flex;
+.set-icons div .star-outline.show {
+    display: inline;
+}
+
+#shoppingList, #enhancementItemsContainer > div > div {
+    background-color: #b99f65;
+    border-radius: 4px;
+    margin: .75em;
+    display: inline-block;
+    vertical-align:top;
+    padding: .5em;
+}
+
+#shoppingList p1, #enhancementItems p1 {
+    font-size: 1.75em;
+    padding: 0 .5em;
+}
+
+#OtherGarmentContainer {
+    display: block;
+    width: 920px;
+}
+
+#shoppingListContainer ul {
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* Style For Star Outlines */
+.set-icons div .star, .set-icons div .star-outline, .icon-wrapper div .star, .icon-wrapper div .star-outline {
+    display: none;
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));
+}
+
+.star-container .star, .star-container .star-outline {
+    width: 1em;
+    height: 1em;
     position: relative;
-    top: -.5em;
 }
 
-.active-tab {
-    background-color: rgba(86, 86, 86, 0.65);
-    color: #faf7dc;
+/* Media querry prevents visibility stickyness */
+@media (hover: hover) {
+    .icon-wrapper-preview:hover .star-outline {
+        display: inline;
+    }
+}
+
+.star-container {
+    position: relative;
+    top: -1.5em;
+    width: 5em;
+    height: 1em;
+    z-index: 099;
+    margin: auto;
 }
 
 /* Icons */
@@ -391,5 +389,165 @@ h2 span {
 @media (orientation: portrait) {
     body {
         background-image: url("../images/totk-bg-port.jpg");
+    }
+
+    .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+        text-align: center;
+        display: inline-block;
+        margin: 0 1.25em;
+    }
+}
+
+
+/* Media Queries */
+/* Mobile Screens (high-denisty pixel phones, 480px and down) */
+@media only screen and (max-width: 480px) {
+    panel, #shoppingList, #enhancementItems {
+        width: 100%;
+    }
+
+    #OtherGarmentContainer {
+        width: calc(100% - 20px);
+    }
+
+    .armor-panel, #enhancementItemsContainer div div {
+        width: calc((100% - 86px)/2);
+    }
+
+    .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+        text-align: center;
+        display: inline-block;
+        margin: 0 .25em;
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (min-width: 480px) {
+    panel, #shoppingList, #enhancementItems {
+        width: 480px;
+    }
+
+    #OtherGarmentContainer {
+        width: 450px;
+    }
+
+    .armor-panel, #enhancementItemsContainer div div {
+        width: calc((480px - 86px)/2);
+    }
+
+    .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+        text-align: center;
+        display: inline-block;
+        margin: 0 .25em;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    panel, #shoppingList, #enhancementItems {
+        width: 560px;
+    }
+
+    #OtherGarmentContainer {
+        width: 520px;
+    }
+
+    .armor-panel, #enhancementItemsContainer div div {
+        width: calc((560px - 86px)/2);
+    }
+
+    .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+        text-align: center;
+        display: inline-block;
+        margin: 0 .25em;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    panel, #shoppingList, #enhancementItems {
+        width: 700px;
+    }
+
+    #OtherGarmentContainer {
+        width: 660px;
+    }
+
+    .armor-panel, #enhancementItemsContainer div div {
+        width: calc((700px - 86px)/2);
+    }
+
+    .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+        text-align: center;
+        display: inline-block;
+        margin: 0 .25em;
+    }
+
+    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img, h2 img {
+        width: 4em;
+        height:4em;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    panel, #shoppingList, #enhancementItems {
+        width: 840px;
+    }
+
+    #OtherGarmentContainer {
+        width: 800px;
+    }
+
+    .armor-panel, #enhancementItemsContainer div div {
+        width: calc((840px - 86px)/2);
+    }
+
+    .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+        text-align: center;
+        display: inline-block;
+        margin: 0 .75em;
+    }
+
+    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img, h2 img {
+        width: 5em;
+        height:5em;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    panel, #shoppingList, #enhancementItems {
+        width: 960px;
+    }
+
+    #OtherGarmentContainer {
+        width: 920px;
+    }
+
+    .armor-panel, #enhancementItemsContainer div div {
+        width:436px;
+    }
+
+    .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+        text-align: center;
+        display: inline-block;
+        margin: 0 1.25em;
+    }
+
+    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img, h2 img {
+        width: 5em;
+        height:5em;
+    }
+
+    .star-container .star, .star-container .star-outline {
+        width: 1em;
+        height: 1em;
+    }
+
+    .star-container {
+        top: -1.5em;
+        width: 5em;
+        height: 1em;
     }
 }

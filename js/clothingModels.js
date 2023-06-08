@@ -121,26 +121,4 @@ for (const item of clothing) {
     clothingSets.push(clothingSetInstance);
   }
 
-console.log(clothingSets);
-
-//trying to regenerate with ChatGPT assistance
-
-// function regenerateClothingSets(clothing) {
-//     const regeneratedClothingSets = [];
-  
-//     for (const item of clothing) {
-//       const { set, head, legs, body, garment, upgrade } = item;
-  
-//       const clothingSetInstance = new ClothingSet(set, head, legs, body, garment, upgrade);
-//       regeneratedClothingSets.push(clothingSetInstance);
-//     }
-  
-//     return regeneratedClothingSets;
-//   }
-  
-//   // Usage example
-//   const clothing = [
-//     // Array of clothing items
-//   ];
-  
-//   const clothingSets = regenerateClothingSets(clothing);
+//console.log(clothingSets);
