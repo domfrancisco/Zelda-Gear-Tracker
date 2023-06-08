@@ -32,6 +32,8 @@ var activeTab = 'cotureCollection';
 
 //Page load steps
     function onPageLoad() {
+        const storedValue = localStorage.getItem("ZeldaTOTKGearTrackerByAdamFData");
+        console.log(storedValue[0]);
         makeCoturePanel();
         const activeTabElement = document.getElementById(activeTab);
         activeTabElement.style.display = 'block';
@@ -473,6 +475,7 @@ function storeNameAndNumber(name, number) {
         // Add new name and number
         data.saveGarments.push({ name, number });
     }
+    localStorage.setItem("ZeldaTOTKGearTrackerByAdamFData", data);
     console.log(data);
 }
 
@@ -485,4 +488,45 @@ function toggleMenu() {
     } else {
         menuDiv.style.display = "none";
     }
+}
+
+//reset to a fresh state
+function resetData() {
+    //all the web elements that need to be reset and their default value
+    const elements = [
+        { id: "enhancementItemsTab", className: "tab" },
+        { id: "enhancementItems", style: { display: "none" } },
+        { id: "enhancementItemsContainer", removeAllChildNodes: true },
+        { id: "enhancementItemsError", style: { display: "block" } },
+        { id: "shoppingListTab", className: "tab" },
+        { id: "shoppingList", style: { display: "none" } },
+        { id: "shoppingListContainer", removeAllChildNodes: true },
+        { id: "shoppingListError", style: { display: "block" } },
+        { id: "cotureCollectionTab", className: "tab active-tab" },
+        { id: "cotureCollection", style: { display: "block" } },
+        { id: "cotureCollectionContainer", removeAllChildNodes: true }
+    ];
+    //loop through and set the default values
+    elements.forEach(element => {
+        const { id, className, style, removeAllChildNodes } = element;
+        const resetThis = document.getElementById(id);
+        if (className) {
+            resetThis.className = className;
+        }
+        if (style) {
+            Object.assign(resetThis.style, style);
+        }
+        if (removeAllChildNodes) {
+            while (resetThis.firstChild) {
+                resetThis.removeChild(resetThis.firstChild);
+            }
+        }
+    });
+    //reset to starting variables
+    shoppingList.length = 0;
+    garmentUpgrades.length = 0;
+    //reset to starting page state
+    toggleMenu();
+    switchTab('cotureCollectionTab');
+    onPageLoad();
 }

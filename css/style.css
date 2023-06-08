@@ -55,12 +55,22 @@ menu ul {
     color: #faf7dc;
     border: 0;
     margin: 0;
+    padding: .25em;
+    display: flex;
+}
+
+menu ul span {
     padding: 1em 4em;
+    display: flex;
     cursor: pointer;
 }
 
-menu ul:hover {
+menu ul span:hover {
     color: white;
+}
+
+menu ul hr {
+    display: flex;
 }
 
 .icon {
