@@ -108,9 +108,18 @@ var activeTab = 'cotureCollection';
         //Put the orphaned garments at the bottom of the list
         var i = 0;
         console.log(nullSetGarments);//IMPORTANT -> Somehow in the middle of th elist it breaks
+        
+        var currentElement;
         nullSetGarments.forEach((item) => {
-            createParagraph(nullSetGarments[i].garment.UpgradeItemsList.UpgradeItemsList, item.garment.UpgradeItemsList.UpgradeItemsList, i, container2);
-            i = i + 1;
+            try{
+                currentElement = item;
+                createParagraph(nullSetGarments[i].garment.UpgradeItemsList.UpgradeItemsList, item.garment.UpgradeItemsList.UpgradeItemsList, i, container2);
+                i = i + 1;
+            }
+            catch(errorElement){
+                console.log("failing index:" + i);
+            }
+           
         });
     }
 
