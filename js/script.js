@@ -47,18 +47,12 @@ var activeTab = 'cotureCollection';
 
 //Create the Coture Collection from the clothes constant
     function makeCoturePanel() {
-        //make a list of each set
-        // Create a Set to store unique set names
-        const uniqueSets = new Set();
-        // Iterate through the nested array
-        clothingSets.forEach(function(item) {
-            if (item.hasOwnProperty('setName') && item.setName !== null) {
-        // Add the set name to the uniqueSets Set
-                uniqueSets.add(item.setName);
-            }
-        });
-        //make a header with link for each set that toggles the garment visibility
         const container = document.getElementById('cotureCollectionContainer');
+        // Create a Set to store unique set names
+        //make a list of each set
+        const uniqueSets = new Set(clothingSets.filter(item => item.hasOwnProperty('setName') && item.setName !== null).map(item => item.setName));
+
+        //make a header with link for each set that toggles the garment visibility
         uniqueSets.forEach((uniqueSetName) => {
             const div = document.createElement('div');
             const heading = document.createElement('h2');
@@ -93,11 +87,11 @@ var activeTab = 'cotureCollection';
         }
         const div2 = document.createElement('div');
         const div3 = document.createElement('div');
-        div3.id = 'OtherGarmentContainer';
-        div2.classList.add('armor-panel');
-        div2.id = 'OtherGarments';
         const heading2 = document.createElement('h2');
         const hr = document.createElement('hr');
+        div2.classList.add('armor-panel');
+        div2.id = 'OtherGarments';
+        div3.id = 'OtherGarmentContainer';
         hr.classList.add('hr2');
         heading2.textContent = "Other Garments";
         div2.appendChild(heading2);
@@ -107,9 +101,8 @@ var activeTab = 'cotureCollection';
         var container2 = document.getElementById('OtherGarmentContainer')
         //Put the orphaned garments at the bottom of the list
         var i = 0;
-        nullSetGarments.forEach((item) => {
-            createParagraph(nullSetGarments[i].garment, item.garment, i, container2);
-            i = i + 1;
+        nullSetGarments.forEach((item, index) => {
+            createParagraph(item.garment, item.garment, index, container2);
         });
     }
 
@@ -484,7 +477,6 @@ function loadData(parsedData) {
             const icon = document.getElementById(removeSpaces(name) + "Icon");
             const iconWrapper = document.getElementById(removeSpaces(name) + "IconWrapper");
             const eLevelTracker = document.getElementById(removeSpaces(name) + 'EnhancementTracker');
-            console.log(saveData)
             eLevelTracker.setAttribute('enhancementlevel', number);
             //update the icon style too
             iconWrapper.classList.add("icon-wrapper-preview");
@@ -494,15 +486,12 @@ function loadData(parsedData) {
             if (icon) {
                 icon.className = (number == 0) ? "p-level-0": "p-level-1";
             }
-            console.log(number);
-            console.log(saveData);
             if (number < 5 || number > 1) {
                 for (let j = 1; j <= number; j ++) {
                     const starElement = document.getElementById(removeSpaces(name) + 'Star' + j);
                     starElement.style.display = 'inline';
                 }
             }
-            console.log('hello');
         }
     } else {
         return;
@@ -574,10 +563,10 @@ function reorderStrings(orderedReferenceList, reorderedDataSet) {
     });
   
     return reorderedCopy;
-  }
+}
 
   function flattenObjectData(obj) {
     return Object.values(obj)
       .flatMap((entry) => Object.values(entry))
       .filter((value) => typeof value === 'string');
-  }
+}
