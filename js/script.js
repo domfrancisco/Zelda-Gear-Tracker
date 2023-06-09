@@ -1,7 +1,7 @@
 //declare Enhancements shoping list that gets updated throughout the code
 var shoppingList = [];
 //declare Acquired Garment list that gets updated throughout the code
-var garmentUpgrades = [];
+var acquiredGarmentCollection = [];
 //variable used to sort garment order
 const orderReferenceList = [];
         //List is created from clothing constant
@@ -9,6 +9,9 @@ const orderReferenceList = [];
             const { set, head, legs, body, garment } = item;
             orderReferenceList.push({ set, head, legs, body, garment });
         }
+//const orderReferenceList = clothing.map(item => ({ 
+//    set: item.set, head: item.head, legs: item.legs, body: item.body, garment: item.garment 
+//}));
 //Declare the starting active tab
 var activeTab = 'cotureCollection';
 
@@ -32,8 +35,9 @@ var activeTab = 'cotureCollection';
 
 //Page load steps
     function onPageLoad() {
-        const storedValue = localStorage.getItem("ZeldaTOTKGearTrackerByAdamFData");
-        console.log(storedValue[0]);
+        const savedData = localStorage.getItem("ZeldaTOTKGearTrackerByAdamFData");
+        const parsedData = JSON.parse(savedData);
+        //console.log(parsedData);
         makeCoturePanel();
         const activeTabElement = document.getElementById(activeTab);
         activeTabElement.style.display = 'block';
@@ -96,13 +100,10 @@ var activeTab = 'cotureCollection';
         div2.classList.add('armor-panel');
         div2.id = 'OtherGarments';
         const heading2 = document.createElement('h2');
-        const flexBreak = document.createElement('div');
-        flexBreak.classList.add('break');
         const hr = document.createElement('hr');
         hr.classList.add('hr2');
         heading2.textContent = "Other Garments";
         div2.appendChild(heading2);
-        div2.appendChild(flexBreak);
         div2.appendChild(hr);
         div2.appendChild(div3);
         container.appendChild(div2);
@@ -194,8 +195,8 @@ function cycleELevel(pVar, setItems, garment) {
         if (icon) {
             icon.className = (eLevel == 0) ? "p-level-0": "p-level-1";
         }
-        console.log(clothingSets[0]);
-        console.log(setItems[garment] + ' , ' + eLevel);
+        //console.log(clothingSets[0]);
+        //console.log(setItems[garment] + ' , ' + eLevel);
         storeNameAndNumber(setItems[garment], eLevel);
     }
 
@@ -236,16 +237,16 @@ function cycleELevel(pVar, setItems, garment) {
             }
         }
         if (level == 5) {
-            garmentUpgrades = garmentUpgrades.filter(item => item.garment !== name);
+            acquiredGarmentCollection = acquiredGarmentCollection.filter(item => item.garment !== name);
         }
         // Find the index of the member array with the same garment as the target
-        const index = garmentUpgrades.findIndex(arr => arr.garment === garmentProperties.garment);
+        const index = acquiredGarmentCollection.findIndex(arr => arr.garment === garmentProperties.garment);
         if (index !== -1) {
             // Remove the member array from the data object
-            garmentUpgrades.splice(index, 1);
+            acquiredGarmentCollection.splice(index, 1);
         }
         // Add the new target array to the data object
-        garmentUpgrades.push(garmentProperties);
+        acquiredGarmentCollection.push(garmentProperties);
         makeEnhancementItemsPanel();
         if (itemsToRemoveFromList) {
             shoppingList = removeItems(shoppingList, itemsToRemoveFromList);
@@ -284,9 +285,9 @@ function cycleELevel(pVar, setItems, garment) {
         while (enhancementItemsContainer.firstChild) {
             enhancementItemsContainer.removeChild(enhancementItemsContainer.firstChild);
         }
-        var reorderedDataset = [...garmentUpgrades];
+        var reorderedDataset = [...acquiredGarmentCollection];
         var errorElement = document.getElementById("enhancementItemsError");
-        if (reorderedDataset.length > 0 && garmentUpgrades[garmentUpgrades.length - 1].length === 0) {
+        if (reorderedDataset.length > 0 && acquiredGarmentCollection[acquiredGarmentCollection.length - 1].length === 0) {
             reorderedDataset.pop(); // Remove the last empty item if no more garments
         }
         for (let i = reorderedDataset.length - 1; i >= 0; i--) {
@@ -295,23 +296,24 @@ function cycleELevel(pVar, setItems, garment) {
             }
         }
         if (reorderedDataset.length > 0) {
-            reorderedDataset.sort((a, b) => {
-                var indexA = orderReferenceList.indexOf(a.garment);
-                var indexB = orderReferenceList.indexOf(b.garment);
-                // If either garment is not found in the reference list, keep the original order
-                if (indexA === -1 || indexB === -1) {
-                    return 0;
-                }
-                // Compare the indices to determine the order
-                return indexA - indexB;
-            });
-            garmentUpgrades = reorderedDataset;
+            // reorderedDataset = reorderedDataset.sort((a, b) => {
+            //     var indexA = orderReferenceList.indexOf(a.garment);
+            //     console.log(a.garment + ',' + indexA);
+            //     var indexB = orderReferenceList.indexOf(b.garment);
+            //     // If either garment is not found in the reference list, keep the original order
+            //     if (indexA === -1 || indexB === -1) {
+            //         return 0;
+            //     }
+            //     // Compare the indices to determine the order
+            //     return indexA - indexB;
+            // });
+            acquiredGarmentCollection = reorderStrings(orderReferenceList, reorderedDataset);
             // Create a container element for the data
             const container = document.getElementById('enhancementItemsContainer');
             //remove all garments before re-generating the list
             const list = document.createElement("div");
             // Loop through each item in the data object
-            for (const item of garmentUpgrades) {
+            for (const item of acquiredGarmentCollection) {
                 // Create a div element for each item
                 const div = document.createElement("div");
                 // Create a heading element for the garment
@@ -485,8 +487,8 @@ function storeNameAndNumber(name, number) {
         // Add new name and number
         data.saveGarments.push({ name, number });
     }
-    localStorage.setItem("ZeldaTOTKGearTrackerByAdamFData", data);
-    console.log(data);
+    localStorage.setItem("ZeldaTOTKGearTrackerByAdamFData", JSON.stringify(data));
+    //console.log(data);
 }
 
 //menu toggle
@@ -534,9 +536,32 @@ function resetData() {
     });
     //reset to starting variables
     shoppingList.length = 0;
-    garmentUpgrades.length = 0;
+    acquiredGarmentCollection.length = 0;
     //reset to starting page state
     toggleMenu();
     switchTab('cotureCollectionTab');
     onPageLoad();
 }
+
+//Fixing Reordering the collection panel - Needed to flatten the reference data to make it work
+function reorderStrings(orderedReferenceList, reorderedDataSet) {
+    // Create a copy of reorderedDataSet
+    const reorderedCopy = [...reorderedDataSet];
+    orderedReferenceList = flattenObjectData(orderedReferenceList)
+    // Sort the reorderedCopy based on the index of each string in orderedReferenceList
+    reorderedCopy.sort((a, b) => {
+      const indexA = orderedReferenceList.indexOf(a.garment);
+      const indexB = orderedReferenceList.indexOf(b.garment);
+      //console.log(a.garment + ',' + b.garment + ',' + indexA + ',' + indexB)
+      //console.log(orderedReferenceList);
+      return indexA - indexB;
+    });
+  
+    return reorderedCopy;
+  }
+
+  function flattenObjectData(obj) {
+    return Object.values(obj)
+      .flatMap((entry) => Object.values(entry))
+      .filter((value) => typeof value === 'string');
+  }

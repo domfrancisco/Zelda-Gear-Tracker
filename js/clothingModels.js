@@ -94,17 +94,17 @@ class ShoppingList{
 //   garment: 4,
 // });
 
-function Tests(){
-    const upgradeItem1 = new Item(5,"upgradeItem1");
-    const upgradeItem2 = new Item(5,"upgradeItem2");
-    const upgradeItem3 = new Item(5,"upgradeItem3");
-    const upgradeList = [upgradeItem1,upgradeItem2,upgradeItem3];
-    const testHelm = new ClothingItem(upgradeList,"TestHelmet");
-    //const testHelm = new ClothingItem(upgradeList,"TestHelmet", clothingType.head);
+// function Tests(){
+//     const upgradeItem1 = new Item(5,"upgradeItem1");
+//     const upgradeItem2 = new Item(5,"upgradeItem2");
+//     const upgradeItem3 = new Item(5,"upgradeItem3");
+//     const upgradeList = [upgradeItem1,upgradeItem2,upgradeItem3];
+//     const testHelm = new ClothingItem(upgradeList,"TestHelmet");
+//     //const testHelm = new ClothingItem(upgradeList,"TestHelmet", clothingType.head);
    
-    testHelm.PrintItem();
-    testHelm.PrintUpgradeList();
-}
+//     testHelm.PrintItem();
+//     testHelm.PrintUpgradeList();
+// }
 
 
 
