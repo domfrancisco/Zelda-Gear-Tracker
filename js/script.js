@@ -91,13 +91,20 @@ var activeTab = 'cotureCollection';
             }
         }
         const div2 = document.createElement('div');
-        div2.id = 'OtherGarmentContainer';
+        const div3 = document.createElement('div');
+        div3.id = 'OtherGarmentContainer';
         div2.classList.add('armor-panel');
+        div2.id = 'OtherGarments';
         const heading2 = document.createElement('h2');
-        const hr = document.createElement('hr2');
+        const flexBreak = document.createElement('div');
+        flexBreak.classList.add('break');
+        const hr = document.createElement('hr');
+        hr.classList.add('hr2');
         heading2.textContent = "Other Garments";
         div2.appendChild(heading2);
+        div2.appendChild(flexBreak);
         div2.appendChild(hr);
+        div2.appendChild(div3);
         container.appendChild(div2);
         var container2 = document.getElementById('OtherGarmentContainer')
         //Put the orphaned garments at the bottom of the list
@@ -124,7 +131,8 @@ var activeTab = 'cotureCollection';
 //Construct the group of garments that make up a Gear Set
     function makeSetIcons(setName, setItems) {
         const resultContainer = document.getElementById(removeSpaces(setName) + 'SetPieces');
-        const hr = document.createElement('hr2');
+        const hr = document.createElement('hr');
+        hr.classList.add("hr2");
         resultContainer.appendChild(hr);
         resultContainer.classList.add("set-icons");
         createParagraph(setItems, setItems.head, 'head', resultContainer);
@@ -343,7 +351,9 @@ function cycleELevel(pVar, setItems, garment) {
                 }
                 // Append the heading and ul elements to the div
                 div.appendChild(heading);
-                div.appendChild(document.createElement('hr2'));
+                hr2 = document.createElement('hr');
+                hr2.classList.add('hr2');
+                div.appendChild(hr2);
                 div.appendChild(ul);
                 // Append the div to the container
                 list.appendChild(div);

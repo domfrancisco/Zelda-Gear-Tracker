@@ -29,7 +29,7 @@ h2 {
     text-align: left;
     vertical-align: top;
     display: inline-block;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 h2 img {
@@ -39,6 +39,12 @@ h2 img {
     vertical-align: middle;
     padding: .1em;
     display: inline;
+    border-top: .5px solid #f6f6f6;
+    border-right: 1px solid #8e8e8e;
+    border-bottom: 1px solid #8e8e8e;
+    border-left: .5px solid #f6f6f6;
+    background-image: url(../images/button-bg.png);
+    background-size: contain;
 }
 
 h2 span {
@@ -149,16 +155,6 @@ error {
     margin: 2em;
 }
 
-hr2 {
-    background-image: url('../images/rune-hr.png');
-    background-repeat: repeat-x;
-    height: 7px;
-    border: none;
-    margin: .75em 0;
-    display: block;
-    background-size: contain;
-}
-
 panel, #shoppingList, #enhancementItems {
     text-align: left;
     display: block;
@@ -217,10 +213,11 @@ tab span {
     top: -.5em;
 }
 
-.armor-panel p p, li{
+.armor-panel p p, .icon-wrapper p, li{
     margin: 0;
     display: inline-flex;
     font-family: "lora", serif;
+    font-size: 1em;
 }
 
 .armor-panel, #enhancementItemsContainer div div {
@@ -242,13 +239,13 @@ tab span {
     text-align: center;
 }
 
-.armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
+.armor-panel .icon-wrapper, ul li {
     text-align: center;
     display: inline-block;
     margin: 0 1.25em;
 }
 
-.armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img, h2 img {
+.armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img {
     width: 5em;
     height:5em;
     max-width: 100%;
@@ -300,6 +297,16 @@ tab span {
     background-color: #faf7dc;
 }
 
+.hr2 {
+    background-image: url('../images/rune-hr.png');
+    background-repeat: repeat-x;
+    height: 7px;
+    border: none;
+    margin: .75em 0;
+    display: block;
+    background-size: contain;
+}
+
 .set-icons {
     display: flex;
     flex-direction: column;
@@ -324,8 +331,34 @@ tab span {
 }
 
 #OtherGarmentContainer {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#OtherGarments {
     width: 920px;
+}
+
+#OtherGarments h2 {
+    align-self: flex-start;
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+#otherGarments hr {
+    display: block;
+    min-width: 100%;
+    margin: 0.5em 0;
+}
+
+#otherGarmentContainer .icon-wrapper {
+    text-align: center;
+    flex: 0 0 50%; /* Adjust the width as needed */
+    display: flex;
+    justify-content: center;
+    margin: 0 1.25em;
 }
 
 #shoppingListContainer ul {
@@ -390,12 +423,6 @@ tab span {
     body {
         background-image: url("../images/totk-bg-port.jpg");
     }
-
-    .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
-        text-align: center;
-        display: inline-block;
-        margin: 0 1.25em;
-    }
 }
 
 
@@ -406,7 +433,7 @@ tab span {
         width: 100%;
     }
 
-    #OtherGarmentContainer {
+    #OtherGarments {
         width: calc(100% - 20px);
     }
 
@@ -415,9 +442,17 @@ tab span {
     }
 
     .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
-        text-align: center;
-        display: inline-block;
-        margin: 0 .25em;
+        margin: 0 .5em;
+    }
+
+    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img {
+        width: 4em;
+        height:4em;
+    }
+
+    .armor-panel p p, .icon-wrapper p, li{
+        font-size: .85em;
+        display: none;
     }
 }
 
@@ -427,7 +462,7 @@ tab span {
         width: 480px;
     }
 
-    #OtherGarmentContainer {
+    #OtherGarments {
         width: 450px;
     }
 
@@ -436,9 +471,17 @@ tab span {
     }
 
     .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
-        text-align: center;
-        display: inline-block;
-        margin: 0 .25em;
+        margin: 0 .5em;
+    }
+
+    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img {
+        width: 4em;
+        height:4em;
+    }
+
+    .armor-panel p p, .icon-wrapper p, li{
+        font-size: .85em;
+        display: none;
     }
 }
 
@@ -448,7 +491,7 @@ tab span {
         width: 560px;
     }
 
-    #OtherGarmentContainer {
+    #OtherGarments {
         width: 520px;
     }
 
@@ -457,9 +500,17 @@ tab span {
     }
 
     .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
-        text-align: center;
-        display: inline-block;
-        margin: 0 .25em;
+        margin: 0 .75em;
+    }
+
+    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img {
+        width: 4em;
+        height:4em;
+    }
+
+    .armor-panel p p, .icon-wrapper p, li{
+        font-size: .85em;
+        display: inline-flex;
     }
 }
 
@@ -469,7 +520,7 @@ tab span {
         width: 700px;
     }
 
-    #OtherGarmentContainer {
+    #OtherGarments {
         width: 660px;
     }
 
@@ -478,14 +529,17 @@ tab span {
     }
 
     .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
-        text-align: center;
-        display: inline-block;
-        margin: 0 .25em;
+        margin: 0 .5em;
     }
 
-    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img, h2 img {
+    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img {
         width: 4em;
         height:4em;
+    }
+
+    .armor-panel p p, .icon-wrapper p, li{
+        font-size: .85em;
+        display: inline-flex;
     }
 }
 
@@ -495,7 +549,7 @@ tab span {
         width: 840px;
     }
 
-    #OtherGarmentContainer {
+    #OtherGarments {
         width: 800px;
     }
 
@@ -504,14 +558,17 @@ tab span {
     }
 
     .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
-        text-align: center;
-        display: inline-block;
         margin: 0 .75em;
     }
 
-    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img, h2 img {
+    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img {
         width: 5em;
         height:5em;
+    }
+
+    .armor-panel p p, .icon-wrapper p, li{
+        font-size: 1em;
+        display: inline-flex;
     }
 }
 
@@ -521,7 +578,7 @@ tab span {
         width: 960px;
     }
 
-    #OtherGarmentContainer {
+    #OtherGarments {
         width: 920px;
     }
 
@@ -530,12 +587,10 @@ tab span {
     }
 
     .armor-panel .icon-wrapper, #otherGarmentContainer .icon-wrapper, ul li {
-        text-align: center;
-        display: inline-block;
         margin: 0 1.25em;
     }
 
-    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img, h2 img {
+    .armor-panel p > div > img:nth-of-type(1), .icon-wrapper > img:nth-of-type(1), li img {
         width: 5em;
         height:5em;
     }
@@ -549,5 +604,10 @@ tab span {
         top: -1.5em;
         width: 5em;
         height: 1em;
+    }
+
+    .armor-panel p p, .icon-wrapper p, li{
+        font-size: 1em;
+        display: inline-flex;
     }
 }
