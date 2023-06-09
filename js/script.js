@@ -36,9 +36,11 @@ var activeTab = 'cotureCollection';
 //Page load steps
     function onPageLoad() {
         const savedData = localStorage.getItem("ZeldaTOTKGearTrackerByAdamFData");
-        const parsedData = JSON.parse(savedData);
-        //console.log(parsedData);
         makeCoturePanel();
+        if (savedData) {
+            const parsedData = JSON.parse(savedData);
+            loadData(parsedData);
+        }
         const activeTabElement = document.getElementById(activeTab);
         activeTabElement.style.display = 'block';
     }
@@ -50,9 +52,6 @@ var activeTab = 'cotureCollection';
         const uniqueSets = new Set();
         // Iterate through the nested array
         clothingSets.forEach(function(item) {
-        //before switching to MODEL
-        //clothing.forEach(function(item) {
-            // Check if the item has the "set" property and it's not null
             if (item.hasOwnProperty('setName') && item.setName !== null) {
         // Add the set name to the uniqueSets Set
                 uniqueSets.add(item.setName);
@@ -84,12 +83,10 @@ var activeTab = 'cotureCollection';
         });
         //Now we need the garments without sets or headers
         const nullSetGarments = [];
-        //before MODEL
-        //for (const entry of clothing) {
         for (const entry of clothingSets) {
             if (entry.setName === null) {
                 const { set, head, legs, body, garment, upgrade } = entry;
-                  // Create an instance of clothingSet and add it to the clothingSets array
+                // Create an instance of clothingSet and add it to the clothingSets array
                 const clothingSetInstance = new clothingSet(set, head, legs, body, garment, upgrade);
                 nullSetGarments.push(clothingSetInstance);
             }
@@ -195,8 +192,6 @@ function cycleELevel(pVar, setItems, garment) {
         if (icon) {
             icon.className = (eLevel == 0) ? "p-level-0": "p-level-1";
         }
-        //console.log(clothingSets[0]);
-        //console.log(setItems[garment] + ' , ' + eLevel);
         storeNameAndNumber(setItems[garment], eLevel);
     }
 
@@ -296,17 +291,6 @@ function cycleELevel(pVar, setItems, garment) {
             }
         }
         if (reorderedDataset.length > 0) {
-            // reorderedDataset = reorderedDataset.sort((a, b) => {
-            //     var indexA = orderReferenceList.indexOf(a.garment);
-            //     console.log(a.garment + ',' + indexA);
-            //     var indexB = orderReferenceList.indexOf(b.garment);
-            //     // If either garment is not found in the reference list, keep the original order
-            //     if (indexA === -1 || indexB === -1) {
-            //         return 0;
-            //     }
-            //     // Compare the indices to determine the order
-            //     return indexA - indexB;
-            // });
             acquiredGarmentCollection = reorderStrings(orderReferenceList, reorderedDataset);
             // Create a container element for the data
             const container = document.getElementById('enhancementItemsContainer');
@@ -470,29 +454,62 @@ function cycleELevel(pVar, setItems, garment) {
         return formattedText;
       }
 
-
 //trying to create saved data
-
-const data = {
+var saveData = {
     saveGarments: []
 };
   
 function storeNameAndNumber(name, number) {
-    const existingIndex = data.saveGarments.findIndex(item => item.name === name);
+    const existingIndex = saveData.saveGarments.findIndex(item => item.name === name);
 
     if (existingIndex !== -1) {
         // Replace existing number
-        data.saveGarments[existingIndex].number = number;
+        saveData.saveGarments[existingIndex].number = number;
     } else {
         // Add new name and number
-        data.saveGarments.push({ name, number });
+        saveData.saveGarments.push({ name, number });
     }
-    localStorage.setItem("ZeldaTOTKGearTrackerByAdamFData", JSON.stringify(data));
-    //console.log(data);
+    localStorage.setItem("ZeldaTOTKGearTrackerByAdamFData", JSON.stringify(saveData));
+}
+
+//trying to load that saved data
+function loadData(parsedData) {
+    saveData = parsedData;
+    if (saveData) {
+        for (let i = 0; i < saveData.saveGarments.length; i++) {
+            var number = saveData.saveGarments[i].number;
+            var name = saveData.saveGarments[i].name;
+            //update all the panels with the new data
+            updateTrackedItems(name, number);
+            const icon = document.getElementById(removeSpaces(name) + "Icon");
+            const iconWrapper = document.getElementById(removeSpaces(name) + "IconWrapper");
+            const eLevelTracker = document.getElementById(removeSpaces(name) + 'EnhancementTracker');
+            console.log(saveData)
+            eLevelTracker.setAttribute('enhancementlevel', number);
+            //update the icon style too
+            iconWrapper.classList.add("icon-wrapper-preview");
+            if (number == 5 || number == 0) {
+                iconWrapper.className = "icon-wrapper";
+            }
+            if (icon) {
+                icon.className = (number == 0) ? "p-level-0": "p-level-1";
+            }
+            console.log(number);
+            console.log(saveData);
+            if (number < 5 || number > 1) {
+                for (let j = 1; j <= number; j ++) {
+                    const starElement = document.getElementById(removeSpaces(name) + 'Star' + j);
+                    starElement.style.display = 'inline';
+                }
+            }
+            console.log('hello');
+        }
+    } else {
+        return;
+    }
 }
 
 //menu toggle
-
 function toggleMenu() {
     const menuDiv = document.getElementById("menuPanel");
     if (menuDiv.style.display === "none") {
@@ -540,6 +557,7 @@ function resetData() {
     //reset to starting page state
     toggleMenu();
     switchTab('cotureCollectionTab');
+    localStorage.removeItem('ZeldaTOTKGearTrackerByAdamFData');
     onPageLoad();
 }
 
@@ -552,8 +570,6 @@ function reorderStrings(orderedReferenceList, reorderedDataSet) {
     reorderedCopy.sort((a, b) => {
       const indexA = orderedReferenceList.indexOf(a.garment);
       const indexB = orderedReferenceList.indexOf(b.garment);
-      //console.log(a.garment + ',' + b.garment + ',' + indexA + ',' + indexB)
-      //console.log(orderedReferenceList);
       return indexA - indexB;
     });
   
