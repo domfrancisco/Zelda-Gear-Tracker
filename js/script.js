@@ -102,7 +102,7 @@ var activeTab = 'cotureCollection';
         //Put the orphaned garments at the bottom of the list
         var i = 0;
         nullSetGarments.forEach((item, index) => {
-            createParagraph(item.garment, item.garment, index, container2);
+            createParagraph(item, item.garment, 'garment', container2);
         });
     }
 
