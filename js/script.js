@@ -171,8 +171,7 @@ var activeTab = 'cotureCollection';
 //Function to handle cycleing Enhancement Level on the Coture Collection
 function cycleELevel(pVar, setItems, garment) {
         //cycle to the next enhancement level
-        eLevel = nextIndexReference(pVar.id);
-        var eLevel = pVar.getAttribute('enhancementLevel');
+    const eLevel = nextIndexReference(pVar.id);
         const icon = document.getElementById(removeSpaces(setItems[garment]) + "Icon");
         const iconWrapper = document.getElementById(removeSpaces(setItems[garment]) + "IconWrapper");
         //update all the panels with the new data
@@ -201,6 +200,7 @@ function cycleELevel(pVar, setItems, garment) {
 
 //Update the two panels that track upgrade item requirements
     function updateTrackedItems(name, level) {
+        level = parseInt(level, 10);
         //gather the item data
         if (level > 0 && level < 6) {
             const star = document.getElementById(removeSpaces(name) + "Star" + (level - 1));
@@ -214,33 +214,32 @@ function cycleELevel(pVar, setItems, garment) {
                 star.style = "display: none;";
             }
         }
-        const itemsToRemoveFromList = findUpgrades(name, level - 1)
-        var garmentProperties = [];
-        var itemsToAddToList = [];
+        const itemsToRemoveFromList = findUpgrades(name, level - 1) || [];
+        let garmentProperties = null;
+        let itemsToAddToList = [];
         if (level < 5 && level > 0) {
-            itemsToAddToList = findUpgrades(name, level)
+            itemsToAddToList = findUpgrades(name, level) || [];
             garmentProperties = {
                 garment: name,
                 requires: itemsToAddToList
             }
         }
-        if (level == 5) {
-            acquiredGarmentCollection = acquiredGarmentCollection.filter(item => item.garment !== name);
-        }
         // Find the index of the member array with the same garment as the target
-        const index = acquiredGarmentCollection.findIndex(arr => arr.garment === garmentProperties.garment);
+        const index = acquiredGarmentCollection.findIndex(arr => arr.garment === name);
         if (index !== -1) {
             // Remove the member array from the data object
             acquiredGarmentCollection.splice(index, 1);
         }
         // Add the new target array to the data object
-        acquiredGarmentCollection.push(garmentProperties);
+        if (garmentProperties) {
+            acquiredGarmentCollection.push(garmentProperties);
+        }
         makeEnhancementItemsPanel();
-        if (itemsToRemoveFromList) {
+        if (itemsToRemoveFromList.length > 0) {
             shoppingList = removeItems(shoppingList, itemsToRemoveFromList);
             itemsToRemoveFromList.splice(0, itemsToRemoveFromList.length);
         }
-        if (itemsToAddToList) {
+        if (itemsToAddToList.length > 0) {
             shoppingList = combineDataSets(itemsToAddToList, shoppingList);
         }
         alphabetizeDataset(shoppingList);
@@ -273,16 +272,8 @@ function cycleELevel(pVar, setItems, garment) {
         while (enhancementItemsContainer.firstChild) {
             enhancementItemsContainer.removeChild(enhancementItemsContainer.firstChild);
         }
-        var reorderedDataset = [...acquiredGarmentCollection];
+        var reorderedDataset = acquiredGarmentCollection.filter(item => item && item.garment);
         var errorElement = document.getElementById("enhancementItemsError");
-        if (reorderedDataset.length > 0 && acquiredGarmentCollection[acquiredGarmentCollection.length - 1].length === 0) {
-            reorderedDataset.pop(); // Remove the last empty item if no more garments
-        }
-        for (let i = reorderedDataset.length - 1; i >= 0; i--) {
-            if (reorderedDataset[i].length === 0) {
-                reorderedDataset.splice(i, 1); //Remove empty items
-            }
-        }
         if (reorderedDataset.length > 0) {
             acquiredGarmentCollection = reorderStrings(orderReferenceList, reorderedDataset);
             // Create a container element for the data
@@ -296,11 +287,12 @@ function cycleELevel(pVar, setItems, garment) {
                 // Create a heading element for the garment
                 const heading = document.createElement("h2");
                 heading.onclick = function() {
-                    var identifier = removeSpaces(item.garment) + "EnhancementTracker";
-                    var paragraph = document.getElementById(identifier);
-                    nextIndexReference(identifier);
-                    var eLevel = paragraph.getAttribute("enhancementlevel");
-                    updateTrackedItems(heading.textContent, eLevel);
+                    const identifier = removeSpaces(item.garment) + "EnhancementTracker";
+                    const paragraph = document.getElementById(identifier);
+                    if (!paragraph) {
+                        return;
+                    }
+                    cycleELevel(paragraph, { garment: item.garment }, "garment");
                 };
                 hedingIcon = document.createElement('img');
                 var imageUrl = "./images/armoricons/" + makeArmorIconName(item.garment);
